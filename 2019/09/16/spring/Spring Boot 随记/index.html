@@ -7,18 +7,16 @@
   
   <title>spring/Spring Boot 随记 | yanzhao</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ApplicationEvent  SpringApplicationEvent ApplicationContextInitializedEvent (初始完成事件) ApplicationEnvironmentPreparedEvent (环境、配置 预处理事件) ApplicationPreparedEvent  （应用预处理事件） ApplicationStartedEvent (程序启动">
+  <meta name="description" content="事件相信看过源码的同学应该都会发现，spring boot 在应用启动过程运用了大量的事件，事件按照spring boot的启动顺序进行发送，不同阶段对应不同事件，EventPublishingRunListener是整个spring boot 生命周期相关事件的发动者。事件主要有以下： 应用启动事件-&gt;环境准备事件-&gt;应用准备事件-&gt;应用完成事件 spring boot应用启动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spring&#x2F;Spring Boot 随记">
 <meta property="og:url" content="http://yoursite.com/2019/09/16/spring/Spring%20Boot%20%E9%9A%8F%E8%AE%B0/index.html">
 <meta property="og:site_name" content="yanzhao">
-<meta property="og:description" content="ApplicationEvent  SpringApplicationEvent ApplicationContextInitializedEvent (初始完成事件) ApplicationEnvironmentPreparedEvent (环境、配置 预处理事件) ApplicationPreparedEvent  （应用预处理事件） ApplicationStartedEvent (程序启动">
-<meta property="og:image" content="c:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570591102712.png">
+<meta property="og:description" content="事件相信看过源码的同学应该都会发现，spring boot 在应用启动过程运用了大量的事件，事件按照spring boot的启动顺序进行发送，不同阶段对应不同事件，EventPublishingRunListener是整个spring boot 生命周期相关事件的发动者。事件主要有以下： 应用启动事件-&gt;环境准备事件-&gt;应用准备事件-&gt;应用完成事件 spring boot应用启动">
 <meta property="article:published_time" content="2019-09-16T09:15:42.701Z">
-<meta property="article:modified_time" content="2019-10-09T08:23:24.626Z">
+<meta property="article:modified_time" content="2020-04-08T07:19:52.337Z">
 <meta property="article:author" content="yanzhao">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570591102712.png">
   
     <link rel="alternate" href="/atom.xml" title="yanzhao" type="application/atom+xml">
   
@@ -89,29 +87,62 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ApplicationEvent</p>
+        <h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>相信看过源码的同学应该都会发现，spring boot 在应用启动过程运用了大量的事件，事件按照spring boot的启动顺序进行发送，不同阶段对应不同事件，<strong>EventPublishingRunListener</strong>是整个spring boot 生命周期相关事件的发动者。事件主要有以下：</p>
+<p><strong><code>应用启动事件-&gt;环境准备事件-&gt;应用准备事件-&gt;应用完成事件</code></strong></p>
+<h3 id="spring-boot应用启动监听：SpringApplicationRunListener"><a href="#spring-boot应用启动监听：SpringApplicationRunListener" class="headerlink" title="spring boot应用启动监听：SpringApplicationRunListener"></a>spring boot应用启动监听：SpringApplicationRunListener</h3><hr>
+<p>SpringApplicationRunListeners listeners = getRunListeners(args);</p>
+<h2 id="listeners-starting"><a href="#listeners-starting" class="headerlink" title="listeners.starting();"></a>listeners.starting();</h2><hr>
+<p>​    run方法执行，发送启动事件</p>
+<hr>
+<h3 id="应用启动事件：-ApplicationStartedEvent"><a href="#应用启动事件：-ApplicationStartedEvent" class="headerlink" title="应用启动事件： ApplicationStartedEvent"></a>应用启动事件： ApplicationStartedEvent</h3><h4 id="相关监听："><a href="#相关监听：" class="headerlink" title="相关监听："></a>相关监听：</h4><h5 id="LoggingApplicationListener"><a href="#LoggingApplicationListener" class="headerlink" title="LoggingApplicationListener"></a>LoggingApplicationListener</h5><h5 id="BackgroundPreinitializer"><a href="#BackgroundPreinitializer" class="headerlink" title="BackgroundPreinitializer"></a>BackgroundPreinitializer</h5><h5 id="DelegatingApplicationListener"><a href="#DelegatingApplicationListener" class="headerlink" title="DelegatingApplicationListener"></a>DelegatingApplicationListener</h5><h5 id="LiquibaseServiceLocatorApplicationListener"><a href="#LiquibaseServiceLocatorApplicationListener" class="headerlink" title="LiquibaseServiceLocatorApplicationListener"></a>LiquibaseServiceLocatorApplicationListener</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#org.springframework.boot.context.event.EventPublishingRunListener#contextPrepared</span><br><span class="line">public void contextPrepared(ConfigurableApplicationContext context) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="环境准备事件：ApplicationEnvironmentPreparedEvent"><a href="#环境准备事件：ApplicationEnvironmentPreparedEvent" class="headerlink" title="环境准备事件：ApplicationEnvironmentPreparedEvent"></a>环境准备事件：ApplicationEnvironmentPreparedEvent</h3><h4 id="相关监听：-1"><a href="#相关监听：-1" class="headerlink" title="相关监听："></a>相关监听：</h4><h5 id="AnsiOutputApplicationListener"><a href="#AnsiOutputApplicationListener" class="headerlink" title="AnsiOutputApplicationListener"></a>AnsiOutputApplicationListener</h5><h5 id="LoggingApplicationListener-1"><a href="#LoggingApplicationListener-1" class="headerlink" title="LoggingApplicationListener"></a>LoggingApplicationListener</h5><h5 id="BackgroundPreinitializer-1"><a href="#BackgroundPreinitializer-1" class="headerlink" title="BackgroundPreinitializer"></a>BackgroundPreinitializer</h5><h5 id="ApplicationPidFileWriter"><a href="#ApplicationPidFileWriter" class="headerlink" title="ApplicationPidFileWriter"></a>ApplicationPidFileWriter</h5><h5 id="BootstrapApplicationListener"><a href="#BootstrapApplicationListener" class="headerlink" title="BootstrapApplicationListener"></a><strong>BootstrapApplicationListener</strong></h5><h5 id="ConfigFileApplicationListener"><a href="#ConfigFileApplicationListener" class="headerlink" title="ConfigFileApplicationListener"></a><strong>ConfigFileApplicationListener</strong></h5><hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ConfigurableEnvironment environment = getOrCreateEnvironment();</span><br><span class="line">configureEnvironment(environment, applicationArguments.getSourceArgs());</span><br><span class="line">listeners.environmentPrepared(environment);</span><br><span class="line"></span><br><span class="line"># EventPublishingRunListener</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">environmentPrepared</span><span class="params">(ConfigurableEnvironment environment)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.initialMulticaster.multicastEvent(<span class="keyword">new</span> ApplicationEnvironmentPreparedEvent(</span><br><span class="line">    <span class="keyword">this</span>.application, <span class="keyword">this</span>.args, environment));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="ContextPrepared-准备事件"><a href="#ContextPrepared-准备事件" class="headerlink" title="ContextPrepared 准备事件"></a>ContextPrepared 准备事件</h3><p>​    &gt; 1.5版本发送空事件，2.0+发送<strong>ApplicationContextInitializedEvent</strong></p>
+<h3 id="应用准备完成：ApplicationPreparedEvent"><a href="#应用准备完成：ApplicationPreparedEvent" class="headerlink" title="应用准备完成：ApplicationPreparedEvent"></a>应用准备完成：ApplicationPreparedEvent</h3><h4 id="相关监听"><a href="#相关监听" class="headerlink" title="相关监听"></a>相关监听</h4><h5 id="LoggingApplicationListener-2"><a href="#LoggingApplicationListener-2" class="headerlink" title="LoggingApplicationListener"></a>LoggingApplicationListener</h5><h5 id="BackgroundPreinitializer-2"><a href="#BackgroundPreinitializer-2" class="headerlink" title="BackgroundPreinitializer"></a>BackgroundPreinitializer</h5><h5 id="DelegatingApplicationListener-1"><a href="#DelegatingApplicationListener-1" class="headerlink" title="DelegatingApplicationListener"></a>DelegatingApplicationListener</h5><h5 id="LiquibaseServiceLocatorApplicationListener-1"><a href="#LiquibaseServiceLocatorApplicationListener-1" class="headerlink" title="LiquibaseServiceLocatorApplicationListener"></a>LiquibaseServiceLocatorApplicationListener</h5><h3 id="应用启动失败事件：ApplicationFailedEvent"><a href="#应用启动失败事件：ApplicationFailedEvent" class="headerlink" title="应用启动失败事件：ApplicationFailedEvent"></a>应用启动失败事件：ApplicationFailedEvent</h3><h4 id="相关监听-1"><a href="#相关监听-1" class="headerlink" title="相关监听"></a>相关监听</h4><h5 id="LoggingApplicationListener-3"><a href="#LoggingApplicationListener-3" class="headerlink" title="LoggingApplicationListener"></a>LoggingApplicationListener</h5><h5 id="BackgroundPreinitializer-3"><a href="#BackgroundPreinitializer-3" class="headerlink" title="BackgroundPreinitializer"></a>BackgroundPreinitializer</h5><h5 id="DelegatingApplicationListener-2"><a href="#DelegatingApplicationListener-2" class="headerlink" title="DelegatingApplicationListener"></a>DelegatingApplicationListener</h5><h5 id="LiquibaseServiceLocatorApplicationListener-2"><a href="#LiquibaseServiceLocatorApplicationListener-2" class="headerlink" title="LiquibaseServiceLocatorApplicationListener"></a>LiquibaseServiceLocatorApplicationListener</h5><h3 id="应用就绪事件：ApplicationReadyEvent"><a href="#应用就绪事件：ApplicationReadyEvent" class="headerlink" title="应用就绪事件：ApplicationReadyEvent"></a>应用就绪事件：ApplicationReadyEvent</h3><h4 id="相关监听-2"><a href="#相关监听-2" class="headerlink" title="相关监听"></a>相关监听</h4><h5 id="LoggingApplicationListener-4"><a href="#LoggingApplicationListener-4" class="headerlink" title="LoggingApplicationListener"></a>LoggingApplicationListener</h5><h5 id="BackgroundPreinitializer-4"><a href="#BackgroundPreinitializer-4" class="headerlink" title="BackgroundPreinitializer"></a>BackgroundPreinitializer</h5><h5 id="DelegatingApplicationListener-3"><a href="#DelegatingApplicationListener-3" class="headerlink" title="DelegatingApplicationListener"></a>DelegatingApplicationListener</h5><h5 id="LiquibaseServiceLocatorApplicationListener-3"><a href="#LiquibaseServiceLocatorApplicationListener-3" class="headerlink" title="LiquibaseServiceLocatorApplicationListener"></a>LiquibaseServiceLocatorApplicationListener</h5><hr>
+<h3 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h3><h4 id="ApplicationEvent"><a href="#ApplicationEvent" class="headerlink" title="ApplicationEvent"></a>ApplicationEvent</h4><ul>
+<li><p>SpringApplicationEvent</p>
 <ul>
-<li>SpringApplicationEvent<ul>
-<li>ApplicationContextInitializedEvent (初始完成事件)</li>
-<li>ApplicationEnvironmentPreparedEvent (环境、配置 预处理事件)</li>
-<li>ApplicationPreparedEvent  （应用预处理事件）</li>
-<li>ApplicationStartedEvent (程序启动完成事件)</li>
-<li>ApplicationReadyEvent (准备事件)</li>
-<li>ApplicationFaildEvent（程序失败事件）</li>
-<li>ApplicationStartingEvent(启动事件)</li>
+<li><p>ApplicationStartingEvent(启动事件)</p>
+</li>
+<li><p>ApplicationContextInitializedEvent (初始完成事件)</p>
+</li>
+<li><p>ApplicationEnvironmentPreparedEvent (环境、配置 预处理事件)</p>
+</li>
+<li><p>ApplicationPreparedEvent  （应用预处理事件）</p>
+</li>
+<li><p>ApplicationStartedEvent (程序启动完成事件)</p>
+</li>
+<li><p>ApplicationReadyEvent (准备事件)</p>
+</li>
+<li><p>ApplicationFaildEvent（程序失败事件）</p>
+</li>
 </ul>
 </li>
-<li>ExitCodeEvent</li>
-<li>ParentContextAvaliableEvent</li>
-<li>JobExecutionEvent</li>
-<li>WebServerInitializedEvent<ul>
+<li><p>ExitCodeEvent</p>
+</li>
+<li><p>ParentContextAvaliableEvent</p>
+</li>
+<li><p>JobExecutionEvent</p>
+</li>
+<li><p>WebServerInitializedEvent</p>
+<ul>
 <li>ReactiveWebServerInitializedEvent</li>
 <li>ServletWebServerInitializedEvent</li>
 </ul>
 </li>
-<li>DataSourceSchemaCreatedEvent</li>
-<li>PayloadApplicationEvent</li>
-<li>ApplicaitonContextEvent<ul>
+<li><p>DataSourceSchemaCreatedEvent</p>
+</li>
+<li><p>PayloadApplicationEvent</p>
+</li>
+<li><p>ApplicaitonContextEvent</p>
+<ul>
 <li>ContextClosedEvent</li>
 <li>ContextRefreshedEvent</li>
 <li>ContextStoppedEvent</li>
@@ -135,20 +166,12 @@
 </li>
 <li>environmentPrepared -&gt; ApplicationEnvironmentPreparedEvent</li>
 <li>contextPrepared -&gt;  ApplicationContextInitializedEvent 事件</li>
-<li></li>
 </ul>
-<p>ApplicationContext</p>
-<ul>
-<li>ConfingurableApplicationContext</li>
-<li>WebApplicationContext</li>
-<li>WebServerApplicaitonContext</li>
-</ul>
-<p><img src="C:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1570591102712.png" alt="1570591102712"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/16/spring/Spring%20Boot%20%E9%9A%8F%E8%AE%B0/" data-id="ck8pn7og90000h0tz4j6gad94" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/16/spring/Spring%20Boot%20%E9%9A%8F%E8%AE%B0/" data-id="ck8qzrq9j00008stz6nzlf0aq" class="article-share-link">Share</a>
       
       
     </footer>
