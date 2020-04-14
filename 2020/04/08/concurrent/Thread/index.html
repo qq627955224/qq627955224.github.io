@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>concurrent/Thread | yanzhao</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Thread产生背景随机机器的配置的不断升级，继续对机器资源充分利用 需求方案使用状态  new    1Thread thread &#x3D; new Thread(()-&gt;System.out.print(&quot;hi,i&#39;m created&quot;));       running 12&#x2F;&#x2F;小样，我启动了thread.start();       blocked 123456789101112131415">
+<meta property="og:type" content="article">
+<meta property="og:title" content="concurrent&#x2F;Thread">
+<meta property="og:url" content="http://qq627955224.github.io/2020/04/08/concurrent/Thread/index.html">
+<meta property="og:site_name" content="yanzhao">
+<meta property="og:description" content="Thread产生背景随机机器的配置的不断升级，继续对机器资源充分利用 需求方案使用状态  new    1Thread thread &#x3D; new Thread(()-&gt;System.out.print(&quot;hi,i&#39;m created&quot;));       running 12&#x2F;&#x2F;小样，我启动了thread.start();       blocked 123456789101112131415">
+<meta property="og:image" content="c:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1563871676258.png">
+<meta property="og:image" content="c:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1563871859131.png">
+<meta property="article:published_time" content="2020-04-08T09:09:16.877Z">
+<meta property="article:modified_time" content="2019-09-10T09:15:01.528Z">
+<meta property="article:author" content="yanzhao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1563871676258.png">
+  
+    <link rel="alternate" href="/atom.xml" title="yanzhao" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yanzhao</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">You need to leave your footprints on the way forward. Do not look back in blank</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://qq627955224.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-concurrent/Thread" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/08/concurrent/Thread/" class="article-date">
+  <time datetime="2020-04-08T09:09:16.877Z" itemprop="datePublished">2020-04-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      concurrent/Thread
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h1><h3 id="产生背景"><a href="#产生背景" class="headerlink" title="产生背景"></a>产生背景</h3><p>随机机器的配置的不断升级，继续对机器资源充分利用</p>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p><strong>状态</strong></p>
+<ul>
+<li><p>new   </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread thread = <span class="keyword">new</span> Thread(()-&gt;System.out.print(<span class="string">"hi,i'm created"</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>running</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//小样，我启动了</span></span><br><span class="line">thread.start();</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>blocked</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> BlockThread(), <span class="string">"Thread_wait"</span>).start();</span><br><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> BlockThread(), <span class="string">"Thread_block"</span>).start();</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">BlockThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (BlockThread<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    BlockThread<span class="class">.<span class="keyword">class</span>.<span class="title">wait</span>()</span>;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>waiting</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> BlockThread(), <span class="string">"Thread_wait"</span>).start();</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">BlockThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (BlockThread<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    BlockThread<span class="class">.<span class="keyword">class</span>.<span class="title">wait</span>()</span>;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>timed_waiting</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.MINUTES.sleep(<span class="number">10L</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, <span class="string">"Thread_sleep"</span>).start();</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>terminated</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Thread thread = <span class="keyword">new</span> Thread(()-&gt;System.out.print(<span class="string">"hi,i'm created"</span>));</span><br><span class="line"><span class="comment">//小样，我启动了</span></span><br><span class="line">thread.start();</span><br><span class="line"><span class="comment">//thread 任务执行完成，状态变动</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="InterruptedException"><a href="#InterruptedException" class="headerlink" title="InterruptedException"></a>InterruptedException</h3><p><strong>堵塞线程，都需要trycatch这么一个异常，why？</strong></p>
+<ul>
+<li><p>非堵塞发生interrupt，状态如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Thread interrupt = <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"状态："</span> + Thread.currentThread().isInterrupted());</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> Random().nextInt(<span class="number">100</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">interrupt.start();</span><br><span class="line">TimeUnit.SECONDS.sleep(<span class="number">1</span>L);</span><br><span class="line">interrupt.interrupt();</span><br><span class="line">System.out.println(interrupt.isInterrupted());</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="C:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1563871676258.png" alt="1563871676258"></p>
+<ul>
+<li><p>线程运行，发起终止操作，如，interrupt，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Thread interrupt = <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">1l</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> Random().nextInt(<span class="number">100</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">interrupt.start();</span><br><span class="line">TimeUnit.SECONDS.sleep(<span class="number">1L</span>);</span><br><span class="line">interrupt.interrupt();</span><br></pre></td></tr></table></figure>
+
+<p>实际发现运行，抛异常之后，继续执行，说明线程并没有停止，此时，他发起了线程状态重置</p>
+</li>
+</ul>
+<p><img src="C:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1563871859131.png" alt="1563871859131"></p>
+<p><strong>线程启动之后，isInterrupted  = false,当设置interrupt（）方法之后，isInterrupt == true，但是堵塞线程会立刻将状态重置，isInterrupted  = false。</strong></p>
+<p><strong>Thread#interrupt</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> JNINativeMethod methods[] = &#123;</span><br><span class="line">    &#123;<span class="string">"start0"</span>,           <span class="string">"()V"</span>,        (<span class="keyword">void</span> *)&amp;JVM_StartThread&#125;,</span><br><span class="line">    &#123;<span class="string">"stop0"</span>,            <span class="string">"("</span> OBJ <span class="string">")V"</span>, (<span class="keyword">void</span> *)&amp;JVM_StopThread&#125;,</span><br><span class="line">    &#123;<span class="string">"isAlive"</span>,          <span class="string">"()Z"</span>,        (<span class="keyword">void</span> *)&amp;JVM_IsThreadAlive&#125;,</span><br><span class="line">    &#123;<span class="string">"suspend0"</span>,         <span class="string">"()V"</span>,        (<span class="keyword">void</span> *)&amp;JVM_SuspendThread&#125;,</span><br><span class="line">    &#123;<span class="string">"resume0"</span>,          <span class="string">"()V"</span>,        (<span class="keyword">void</span> *)&amp;JVM_ResumeThread&#125;,</span><br><span class="line">    &#123;<span class="string">"setPriority0"</span>,     <span class="string">"(I)V"</span>,       (<span class="keyword">void</span> *)&amp;JVM_SetThreadPriority&#125;,</span><br><span class="line">    &#123;<span class="string">"yield"</span>,            <span class="string">"()V"</span>,        (<span class="keyword">void</span> *)&amp;JVM_Yield&#125;,</span><br><span class="line">    &#123;<span class="string">"sleep"</span>,            <span class="string">"(J)V"</span>,       (<span class="keyword">void</span> *)&amp;JVM_Sleep&#125;,</span><br><span class="line">    &#123;<span class="string">"currentThread"</span>,    <span class="string">"()"</span> THD,     (<span class="keyword">void</span> *)&amp;JVM_CurrentThread&#125;,</span><br><span class="line">    &#123;<span class="string">"countStackFrames"</span>, <span class="string">"()I"</span>,        (<span class="keyword">void</span> *)&amp;JVM_CountStackFrames&#125;,</span><br><span class="line">    &#123;<span class="string">"interrupt0"</span>,       <span class="string">"()V"</span>,        (<span class="keyword">void</span> *)&amp;JVM_Interrupt&#125;,</span><br><span class="line">    &#123;<span class="string">"isInterrupted"</span>,    <span class="string">"(Z)Z"</span>,       (<span class="keyword">void</span> *)&amp;JVM_IsInterrupted&#125;,</span><br><span class="line">    &#123;<span class="string">"holdsLock"</span>,        <span class="string">"("</span> OBJ <span class="string">")Z"</span>, (<span class="keyword">void</span> *)&amp;JVM_HoldsLock&#125;,</span><br><span class="line">    &#123;<span class="string">"getThreads"</span>,        <span class="string">"()["</span> THD,   (<span class="keyword">void</span> *)&amp;JVM_GetAllThreads&#125;,</span><br><span class="line">    &#123;<span class="string">"dumpThreads"</span>,      <span class="string">"(["</span> THD <span class="string">")[["</span> STE, (<span class="keyword">void</span> *)&amp;JVM_DumpThreads&#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>interrupt</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Thread interruptedThread = <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().isInterrupted());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">interruptedThread.setName(<span class="string">"interruptedThread"</span>);</span><br><span class="line">interruptedThread.start();</span><br><span class="line">TimeUnit.SECONDS.sleep(<span class="number">1L</span>);</span><br><span class="line">interruptedThread.interrupt();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">interrupt</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> != Thread.currentThread())</span><br><span class="line">        checkAccess();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">synchronized</span> (blockerLock) &#123;</span><br><span class="line">        <span class="comment">//此刻blocker是null</span></span><br><span class="line">        Interruptible b = blocker;</span><br><span class="line">        <span class="keyword">if</span> (b != <span class="keyword">null</span>) &#123;</span><br><span class="line">            interrupt0();           <span class="comment">// Just to set the interrupt flag</span></span><br><span class="line">            b.interrupt(<span class="keyword">this</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    interrupt0();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>interrupte0()底层native方法，根据上面的图，我们会发现，他会调jvm层面,jvm.cpp#JVM_Interrupt</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">JVM_ENTRY(<span class="keyword">void</span>, JVM_Interrupt(JNIEnv* env, jobject jthread))</span><br><span class="line">  JVMWrapper(<span class="string">"JVM_Interrupt"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Ensure that the C++ Thread and OSThread structures aren't freed before we operate</span></span><br><span class="line">  oop java_thread = JNIHandles::resolve_non_null(jthread);</span><br><span class="line">  <span class="function">MutexLockerEx <span class="title">ml</span><span class="params">(thread-&gt;threadObj() == java_thread ? <span class="literal">NULL</span> : Threads_lock)</span></span>;</span><br><span class="line">  <span class="comment">// We need to re-resolve the java_thread, since a GC might have happened during the</span></span><br><span class="line">  <span class="comment">// acquire of the lock</span></span><br><span class="line">  JavaThread* thr = java_lang_Thread::thread(JNIHandles::resolve_non_null(jthread));</span><br><span class="line">  <span class="keyword">if</span> (thr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">    <span class="comment">//核心关键此处</span></span><br><span class="line">    Thread::interrupt(thr);</span><br><span class="line">  &#125;</span><br><span class="line">JVM_END</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用thread.cpp#interrupt</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Thread::interrupt</span><span class="params">(Thread* thread)</span> </span>&#123;</span><br><span class="line">  trace(<span class="string">"interrupt"</span>, thread);</span><br><span class="line">  debug_only(check_for_dangling_thread_pointer(thread);)</span><br><span class="line">  <span class="comment">//此处是关键，os代表不同平台，这就是所谓的一次编译多处运行的原因，jvm层面自己针对不同的系统做了不同的实现，我们这里以Linux系统为例，会有os_linux类</span></span><br><span class="line">  os::interrupt(thread);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//os_linux#interrupt，代码4202行，此方法有几处核心代码</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">os::interrupt</span><span class="params">(Thread* thread)</span> </span>&#123;</span><br><span class="line">  assert(Thread::current() == thread || Threads_lock-&gt;owned_by_self(),</span><br><span class="line">    <span class="string">"possibility of dangling Thread pointer"</span>);</span><br><span class="line"></span><br><span class="line">  OSThread* osthread = thread-&gt;osthread();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//判断是否状态，false情况</span></span><br><span class="line">  <span class="keyword">if</span> (!osthread-&gt;interrupted()) &#123;</span><br><span class="line">  	<span class="comment">//设置为终端状态,这个代码在 osThread.hpp#set_interrupted(89行)</span></span><br><span class="line">  	<span class="comment">//void set_interrupted(bool z) &#123; _interrupted，是valitole = z ? 1 : 0; &#125;</span></span><br><span class="line">  	<span class="comment">//osThread对象里面维护了一个_interrupted，是valotile修复int类型，代码如下，1或者0  </span></span><br><span class="line">  	<span class="comment">//volatile jint _interrupted;     // Thread.isInterrupted state</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">//设置为true，就是为1，	</span></span><br><span class="line">    osthread-&gt;set_interrupted(<span class="literal">true</span>);</span><br><span class="line">    <span class="comment">// 内存屏障</span></span><br><span class="line">    OrderAccess::fence();</span><br><span class="line">    <span class="comment">//线程存在sleep事件，通过unpark方法唤醒</span></span><br><span class="line">    ParkEvent * <span class="keyword">const</span> slp = thread-&gt;_SleepEvent ;</span><br><span class="line">    <span class="keyword">if</span> (slp != <span class="literal">NULL</span>) slp-&gt;unpark() ;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// For JSR166. Unpark even if interrupt status already was set</span></span><br><span class="line">  <span class="keyword">if</span> (thread-&gt;is_Java_thread())</span><br><span class="line">    ((JavaThread*)thread)-&gt;parker()-&gt;unpark();</span><br><span class="line"></span><br><span class="line">  <span class="comment">//wait、join等堵塞事件唤醒</span></span><br><span class="line">  ParkEvent * ev = thread-&gt;_ParkEvent ;</span><br><span class="line">  <span class="keyword">if</span> (ev != <span class="literal">NULL</span>) ev-&gt;unpark() ;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>interrupt总结说明</strong>：线程会通过native层，将osThread里面的_interrupted变量设置成1，同时要唤醒处理睡眠、wait等线程</p>
+<p><strong>interrupted</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">interrupted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> currentThread().isInterrupted(<span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">isInterrupted</span><span class="params">(<span class="keyword">boolean</span> ClearInterrupted)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>isInterrupted</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这段代码很重要，特别是ClearInterrupted参数，此参数值一直在后面沿用，均是false</span></span><br><span class="line">public boolean isInterrupted() &#123;</span><br><span class="line">    <span class="keyword">return</span> isInterrupted(<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line">private native boolean isInterrupted(boolean ClearInterrupted);</span><br></pre></td></tr></table></figure>
+
+<p>上面我们两段代码，我们分部调用了<strong>interrupted()</strong>、<strong>isInterrupted()</strong>，我们进入底层代码发现，他最后都是调用了native方法<strong>isInterrupted(boolean ClearInterrupted)</strong>,只不过在interrupted调用适合默认传入true，isInterrupted调用时候传入的是false。</p>
+<p>通过上面的的native对应方法，我们很快定位到<strong>jvm.cpp#JVM_IsInterrupted</strong>方法，代码如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">JVM_QUICK_ENTRY(jboolean, JVM_IsInterrupted(JNIEnv* env, jobject jthread, jboolean clear_interrupted))</span><br><span class="line">  JVMWrapper(<span class="string">"JVM_IsInterrupted"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Ensure that the C++ Thread and OSThread structures aren't freed before we operate</span></span><br><span class="line">  oop java_thread = JNIHandles::resolve_non_null(jthread);</span><br><span class="line">  <span class="function">MutexLockerEx <span class="title">ml</span><span class="params">(thread-&gt;threadObj() == java_thread ? <span class="literal">NULL</span> : Threads_lock)</span></span>;</span><br><span class="line">  <span class="comment">// We need to re-resolve the java_thread, since a GC might have happened during the</span></span><br><span class="line">  <span class="comment">// acquire of the lock</span></span><br><span class="line">  JavaThread* thr = java_lang_Thread::thread(JNIHandles::resolve_non_null(jthread));</span><br><span class="line">  <span class="keyword">if</span> (thr == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> JNI_FALSE;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//关键代码，根据我们interrupt方法一样，我们要定位到Thread.cpp#is_interrupted，clear_interrupted参数在interrupted情况下是true，isInterrupted是false</span></span><br><span class="line">    <span class="keyword">return</span> (jboolean) Thread::is_interrupted(thr, clear_interrupted != <span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">JVM_END</span><br><span class="line"></span><br><span class="line"><span class="comment">//thread.cpp#is_interrupted</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Thread::is_interrupted</span><span class="params">(Thread* thread, <span class="keyword">bool</span> clear_interrupted)</span> </span>&#123;</span><br><span class="line">  trace(<span class="string">"is_interrupted"</span>, thread);</span><br><span class="line">  debug_only(check_for_dangling_thread_pointer(thread);)</span><br><span class="line">  <span class="comment">// Note:  If clear_interrupted==false, this simply fetches and</span></span><br><span class="line">  <span class="comment">// returns the value of the field osthread()-&gt;interrupted().</span></span><br><span class="line">  <span class="comment">//核心代码，os是os_linux为例</span></span><br><span class="line">  <span class="keyword">return</span> os::is_interrupted(thread, clear_interrupted);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//os_linux#is_interrupted</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">os::is_interrupted</span><span class="params">(Thread* thread, <span class="keyword">bool</span> clear_interrupted)</span> </span>&#123;</span><br><span class="line">  assert(Thread::current() == thread || Threads_lock-&gt;owned_by_self(),</span><br><span class="line">    <span class="string">"possibility of dangling Thread pointer"</span>);</span><br><span class="line"></span><br><span class="line">  OSThread* osthread = thread-&gt;osthread();</span><br><span class="line">  <span class="comment">//这个代码很关键，他会获取osthread#interrupted的值，此时的osThread是osThread.java对象，</span></span><br><span class="line">  <span class="keyword">bool</span> interrupted = osthread-&gt;interrupted();</span><br><span class="line">  <span class="comment">//clear_interrupted参数在interrupted情况下是ture，isInterrupted是false</span></span><br><span class="line">  <span class="comment">//interrupted 是内存中值，interrupt 下进行修改的</span></span><br><span class="line">  <span class="keyword">if</span> (interrupted &amp;&amp; clear_interrupted) &#123;</span><br><span class="line">    osthread-&gt;set_interrupted(<span class="literal">false</span>);</span><br><span class="line">    <span class="comment">// consider thread-&gt;_SleepEvent-&gt;reset() ... optional optimization</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> interrupted;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//osThread.java对象</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">interrupted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//获取一个内存地址值，interrupt之后，此时值是1，返回true</span></span><br><span class="line">     <span class="keyword">return</span> ((<span class="keyword">int</span>)interruptedField.getValue(addr)) != <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>经过分析，可以得出一个结论，interrupted是状态复位，就是将线程标记中断的状态修改为未中断状态，因此当线程是未状态状态下，实际interrupted是没有做任何状态的修改，只有在interrupte执行之后，线程标识中断状态，再次执行interrupted才会修改中断状态的值</strong></p>
+<h3 id="sleep神秘面纱"><a href="#sleep神秘面纱" class="headerlink" title="sleep神秘面纱"></a>sleep神秘面纱</h3><p>我们想了解一个东西的执行流程是怎样的，一般是通过开头去找，这样方便快速理解。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">static</span> <span class="keyword">void</span> sleep(long millis, int nanos)</span><br><span class="line">	throws InterruptedException &#123;</span><br><span class="line">    <span class="keyword">if</span> (millis &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"timeout value is negative"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (nanos &lt; <span class="number">0</span> || nanos &gt; <span class="number">999999</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(</span><br><span class="line">            <span class="string">"nanosecond timeout value out of range"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (nanos &gt;= <span class="number">500000</span> || (nanos != <span class="number">0</span> &amp;&amp; millis == <span class="number">0</span>)) &#123;</span><br><span class="line">        millis++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sleep(millis);</span><br><span class="line">&#125;</span><br><span class="line">public <span class="keyword">static</span> native <span class="keyword">void</span> sleep(long millis) throws InterruptedException;</span><br></pre></td></tr></table></figure>
+
+<p>我们继续跟进上面的对应关系，我们很快定位到，jvm.cpp#JVM_Sleep方法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">VM_ENTRY(<span class="keyword">void</span>, JVM_Sleep(JNIEnv* env, jclass threadClass, jlong <span class="built_in">millis</span>))</span><br><span class="line">  JVMWrapper(<span class="string">"JVM_Sleep"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">millis</span> &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    THROW_MSG(vmSymbols::java_lang_IllegalArgumentException(), <span class="string">"timeout value is negative"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//关键：判断已经中断，直接抛出异常，没有情况，会继续执行</span></span><br><span class="line">  <span class="keyword">if</span> (Thread::is_interrupted (THREAD, <span class="literal">true</span>) &amp;&amp; !HAS_PENDING_EXCEPTION) &#123;</span><br><span class="line">    THROW_MSG(vmSymbols::java_lang_InterruptedException(), <span class="string">"sleep interrupted"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Save current thread state and restore it at the end of this block.</span></span><br><span class="line">  <span class="comment">// And set new thread state to SLEEPING.</span></span><br><span class="line">  <span class="function">JavaThreadSleepState <span class="title">jtss</span><span class="params">(thread)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> USDT2</span></span><br><span class="line">  HS_DTRACE_PROBE1(hotspot, thread__sleep__begin, <span class="built_in">millis</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> <span class="comment">/* USDT2 */</span></span></span><br><span class="line">  HOTSPOT_THREAD_SLEEP_BEGIN(</span><br><span class="line">                             <span class="built_in">millis</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* USDT2 */</span></span></span><br><span class="line"></span><br><span class="line">  EventThreadSleep event;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">millis</span> == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">//判断是否0，这个忽略</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ThreadState old_state = thread-&gt;osthread()-&gt;get_state();</span><br><span class="line">    thread-&gt;osthread()-&gt;set_state(SLEEPING);</span><br><span class="line">    <span class="comment">//关键：os_linux 会判断是否中断，中断=》进入，没有中断，提交事件</span></span><br><span class="line">    <span class="keyword">if</span> (os::sleep(thread, <span class="built_in">millis</span>, <span class="literal">true</span>) == OS_INTRPT) &#123;</span><br><span class="line">      <span class="comment">// An asynchronous exception (e.g., ThreadDeathException) could have been thrown on</span></span><br><span class="line">      <span class="comment">// us while we were sleeping. We do not overwrite those.</span></span><br><span class="line">      <span class="keyword">if</span> (!HAS_PENDING_EXCEPTION) &#123;</span><br><span class="line">        <span class="keyword">if</span> (event.should_commit()) &#123;</span><br><span class="line">          event.set_time(<span class="built_in">millis</span>);</span><br><span class="line">          event.commit();</span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> USDT2</span></span><br><span class="line">        HS_DTRACE_PROBE1(hotspot, thread__sleep__end,<span class="number">1</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> <span class="comment">/* USDT2 */</span></span></span><br><span class="line">        HOTSPOT_THREAD_SLEEP_END(</span><br><span class="line">                                 <span class="number">1</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* USDT2 */</span></span></span><br><span class="line">        <span class="comment">// TODO-<span class="doctag">FIXME:</span> THROW_MSG returns which means we will not call set_state()</span></span><br><span class="line">        <span class="comment">// to properly restore the thread state.  That's likely wrong.</span></span><br><span class="line">        THROW_MSG(vmSymbols::java_lang_InterruptedException(), <span class="string">"sleep interrupted"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    thread-&gt;osthread()-&gt;set_state(old_state);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (event.should_commit()) &#123;</span><br><span class="line">    event.set_time(<span class="built_in">millis</span>);</span><br><span class="line">    event.commit();</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> USDT2</span></span><br><span class="line">  HS_DTRACE_PROBE1(hotspot, thread__sleep__end,<span class="number">0</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> <span class="comment">/* USDT2 */</span></span></span><br><span class="line">  HOTSPOT_THREAD_SLEEP_END(</span><br><span class="line">                           <span class="number">0</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* USDT2 */</span></span></span><br><span class="line">JVM_END</span><br><span class="line"></span><br><span class="line">os_linux.cpp</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">os::sleep</span><span class="params">(Thread* thread, jlong <span class="built_in">millis</span>, <span class="keyword">bool</span> interruptible)</span> </span>&#123;</span><br><span class="line">	jlong prevtime = javaTimeNanos();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">      <span class="keyword">if</span> (os::is_interrupted(thread, <span class="literal">true</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> OS_INTRPT;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      jlong newtime = javaTimeNanos();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (newtime - prevtime &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// time moving backwards, should only happen if no monotonic clock</span></span><br><span class="line">        <span class="comment">// not a guarantee() because JVM should not abort on kernel/glibc bugs</span></span><br><span class="line">        assert(!Linux::supports_monotonic_clock(), <span class="string">"time moving backwards"</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">millis</span> -= (newtime - prevtime) / NANOSECS_PER_MILLISEC;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(<span class="built_in">millis</span> &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> OS_OK;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      prevtime = newtime;</span><br><span class="line"></span><br><span class="line">      &#123;</span><br><span class="line">        assert(thread-&gt;is_Java_thread(), <span class="string">"sanity check"</span>);</span><br><span class="line">        JavaThread *jt = (JavaThread *) thread;</span><br><span class="line">        <span class="function">ThreadBlockInVM <span class="title">tbivm</span><span class="params">(jt)</span></span>;</span><br><span class="line">        <span class="function">OSThreadWaitState <span class="title">osts</span><span class="params">(jt-&gt;osthread(), <span class="literal">false</span> <span class="comment">/* not Object.wait() */</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">        jt-&gt;set_suspend_equivalent();</span><br><span class="line">        <span class="comment">// cleared by handle_special_suspend_equivalent_condition() or</span></span><br><span class="line">        <span class="comment">// java_suspend_self() via check_and_wait_while_suspended()</span></span><br><span class="line"></span><br><span class="line">        slp-&gt;park(<span class="built_in">millis</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// were we externally suspended while we were waiting?</span></span><br><span class="line">        jt-&gt;check_and_wait_while_suspended();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>interrupt 可以使 sleep、join以及wait方法抛出异常，同时interrupt状态被清楚既复位然后抛出InterruptedException</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qq627955224.github.io/2020/04/08/concurrent/Thread/" data-id="ck8r5atur00011gtz2e1u7njk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/08/concurrent/volatile/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          concurrent/volatile
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/08/concurrent/synchronized/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">concurrent/synchronized</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/09/docker/notepad/k8s%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">docker/notepad/k8s常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/lock/Lock/">Lock</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/volatile/">concurrent/volatile</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/Thread/">concurrent/Thread</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/synchronized/">concurrent/synchronized</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 yanzhao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

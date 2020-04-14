@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>yanzhao</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="奔跑的路上从不缺少陪伴，只要努力，总有人陪同，不要吝啬，写下奔跑途中的风景">
+<meta property="og:type" content="website">
+<meta property="og:title" content="yanzhao">
+<meta property="og:url" content="http://qq627955224.github.io/page/2/index.html">
+<meta property="og:site_name" content="yanzhao">
+<meta property="og:description" content="奔跑的路上从不缺少陪伴，只要努力，总有人陪同，不要吝啬，写下奔跑途中的风景">
+<meta property="article:author" content="yanzhao">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="yanzhao" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yanzhao</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">You need to leave your footprints on the way forward. Do not look back in blank</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://qq627955224.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-spring/Spring-心得" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/10/spring/Spring-%E5%BF%83%E5%BE%97/" class="article-date">
+  <time datetime="2019-09-10T09:57:51.644Z" itemprop="datePublished">2019-09-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/10/spring/Spring-%E5%BF%83%E5%BE%97/">spring/Spring-心得</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h1><h2 id="自定义作用域"><a href="#自定义作用域" class="headerlink" title="自定义作用域"></a>自定义作用域</h2><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li><pre><code>org.springframework.beans.factory.config.Scope</code></pre></li>
+</ul>
+<h1 id="生命周期回调"><a href="#生命周期回调" class="headerlink" title="生命周期回调"></a>生命周期回调</h1><h2 id="InitializingBean"><a href="#InitializingBean" class="headerlink" title="InitializingBean"></a>InitializingBean</h2><h2 id="DisposableBean"><a href="#DisposableBean" class="headerlink" title="DisposableBean"></a>DisposableBean</h2><h2 id="BeanPostProcessor"><a href="#BeanPostProcessor" class="headerlink" title="BeanPostProcessor"></a>BeanPostProcessor</h2><h2 id="Lifecycle"><a href="#Lifecycle" class="headerlink" title="Lifecycle"></a>Lifecycle</h2><h2 id="BeanFactoryPostProcessor"><a href="#BeanFactoryPostProcessor" class="headerlink" title="BeanFactoryPostProcessor"></a>BeanFactoryPostProcessor</h2><h1 id="加载顺序"><a href="#加载顺序" class="headerlink" title="加载顺序"></a>加载顺序</h1><h3 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h3><ol>
+<li>BeanPostProcessor#postProcessBeforeInitialization</li>
+<li>InitializingBean#afterPropertiesSet</li>
+<li>BeanPostProcessor#postProcessAfterInitialization</li>
+<li>SmartLifecycle(非Lifecycle)#start</li>
+</ol>
+<h3 id="销毁顺序"><a href="#销毁顺序" class="headerlink" title="销毁顺序"></a>销毁顺序</h3><p>DisposableBean#destroy</p>
+<blockquote>
+<p>SmartLifecycle的stop方法并未执行，存在疑问？</p>
+</blockquote>
+<h4 id="AutowiredAnnotationBeanPostProcessor-Spirng-注解"><a href="#AutowiredAnnotationBeanPostProcessor-Spirng-注解" class="headerlink" title="AutowiredAnnotationBeanPostProcessor Spirng 注解"></a>AutowiredAnnotationBeanPostProcessor Spirng 注解</h4><h4 id="CommonAnnotationBeanPostProcessor-JSR注解"><a href="#CommonAnnotationBeanPostProcessor-JSR注解" class="headerlink" title="CommonAnnotationBeanPostProcessor JSR注解"></a>CommonAnnotationBeanPostProcessor JSR注解</h4><h3 id="常用Spirng注解"><a href="#常用Spirng注解" class="headerlink" title="常用Spirng注解"></a>常用Spirng注解</h3><ul>
+<li>Configuration</li>
+<li>Bean</li>
+</ul>
+<blockquote>
+<p>一般情况下两者结合使用，当然也可以在Component对象中使用，但是@Configuration使用，可以做到管理</p>
+</blockquote>
+<ul>
+<li>ComponentScan</li>
+</ul>
+<blockquote>
+<p>指定扫描包路径，默认是当前类所在包以及子包，类似xml，&lt;context:component-scan base-package=”com.acme”/&gt;</p>
+</blockquote>
+<ul>
+<li>Import</li>
+</ul>
+<blockquote>
+<p>导入，如同xml <import>,导入多个配置文件，一般联合 Configuration使用，</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigA</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> A <span class="title">a</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> A();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import</span>(ConfigA<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">ConfigB</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> B <span class="title">b</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> B();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ApplicationContext ctx = <span class="keyword">new</span> AnnotationConfigApplicationContext(ConfigB<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// now both beans A and B will be available...</span></span><br><span class="line">    A a = ctx.getBean(A<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    B b = ctx.getBean(B<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果ConfigB没有通过Import注解引入ConfigA,获取A会是空，通过增加注解import之后，可以正常引用</p>
+<p>此注解的引入，诞生了一大批@Eanblexxx开头的注解</p>
+</blockquote>
+<blockquote>
+<p>@import(class = xxxx)  xxx 一般是 ImportSelector接口、获取@Configuration、ImportBeanDefinitionRegistrar</p>
+</blockquote>
+<ul>
+<li>Condition</li>
+</ul>
+<blockquote>
+<p>一个基于条件进行动态加载bean的注解，springboot进行充分扩展，多大10+，如：ConditionalOnClass、ConditionalOnBean、ConditionalOnJava等</p>
+</blockquote>
+<p>条件类ConditionalValidation</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">通过接口扩展，实现不同环境的加载，启动脚本我们通过增加 -DisLoad=false/true 参数来动态控制 bean是否需要加载</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConditionalValidation</span> <span class="keyword">implements</span> <span class="title">Condition</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String IS_LOAD = <span class="string">"isLoad"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(ConditionContext context, AnnotatedTypeMetadata metadata)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> context.getEnvironment().getProperty(IS_LOAD, Boolean.TYPE);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Logger LOGGER = LoggerFactory.getLogger(AppConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@Conditional</span>(value = ConditionalValidation<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">    <span class="title">public</span> <span class="title">MyService</span> <span class="title">myService</span>()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MyService();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过-DisLoad=fase 执行测试Conditional效果</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ApplicationContext applicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext(AppConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        MyService myService = applicationContext.getBean(MyService<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        myService.say(<span class="string">"hello world!"</span>);</span><br><span class="line">        ((AnnotationConfigApplicationContext) applicationContext).register(OtherConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        OtherConfig otherConfig = applicationContext.getBean(OtherConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        otherConfig.say();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OtherConfig</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span></span>&#123;</span><br><span class="line">            LOGGER.info(<span class="string">"say hello world"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>ImportResource 是导入xml</li>
+<li>ConfigurationProperties 导入properties、yml文件</li>
+</ul>
+<blockquote>
+<p>importResource 用于，存在部分xml文件，需要到导入xml配置文件中的部分参数</p>
+<p>ConfigurationProperties 是springboot中提出的，简化配置，将配置文件自动与实体对象进行映射，需要额外的@Value{} 方式赋值</p>
+</blockquote>
+<p>Dependson 注解</p>
+<h4 id="Environment-Abstraction"><a href="#Environment-Abstraction" class="headerlink" title="Environment Abstraction"></a>Environment Abstraction</h4><p>针对不同环境不同配置</p>
+<h5 id="profile-环境控制"><a href="#profile-环境控制" class="headerlink" title="profile 环境控制"></a>profile 环境控制</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(<span class="string">"dataSource"</span>)</span><br><span class="line">    <span class="meta">@Profile</span>(<span class="string">"development"</span>) </span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">standaloneDataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> EmbeddedDatabaseBuilder()</span><br><span class="line">            .setType(EmbeddedDatabaseType.HSQL)</span><br><span class="line">            .addScript(<span class="string">"classpath:com/bank/config/sql/schema.sql"</span>)</span><br><span class="line">            .addScript(<span class="string">"classpath:com/bank/config/sql/test-data.sql"</span>)</span><br><span class="line">            .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(<span class="string">"dataSource"</span>)</span><br><span class="line">    <span class="meta">@Profile</span>(<span class="string">"production"</span>) </span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">jndiDataSource</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Context ctx = <span class="keyword">new</span> InitialContext();</span><br><span class="line">        <span class="keyword">return</span> (DataSource) ctx.lookup(<span class="string">"java:comp/env/jdbc/datasource"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">测试环境创建AAA对象</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="meta">@Profile</span>(<span class="string">"dev"</span>)</span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">DevConfig</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> A <span class="title">a</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="keyword">new</span> AAA();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">测试环境创建AA对象</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="meta">@Profile</span>(<span class="string">"prod"</span>)</span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">DevConfig</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> A <span class="title">a</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">return</span> <span class="keyword">new</span> AA();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="properties-参数配置"><a href="#properties-参数配置" class="headerlink" title="properties 参数配置"></a>properties 参数配置</h5><h4 id="StandardEnrionment"><a href="#StandardEnrionment" class="headerlink" title="StandardEnrionment"></a>StandardEnrionment</h4><p>标准的环境配置，复杂加载系统（os）配置以及环境(system)配置</p>
+<ul>
+<li>系统配置：系统变量</li>
+<li>环境配置：jvm参数</li>
+</ul>
+<h4 id="扩展类"><a href="#扩展类" class="headerlink" title="扩展类"></a>扩展类</h4><h5 id="StandardServletEnvironment"><a href="#StandardServletEnvironment" class="headerlink" title="StandardServletEnvironment"></a>StandardServletEnvironment</h5><h5 id="StandardReactiveWebEnvironment"><a href="#StandardReactiveWebEnvironment" class="headerlink" title="StandardReactiveWebEnvironment"></a>StandardReactiveWebEnvironment</h5><p>spring boot 主要是启动监听，ConfigFileApplicationListener</p>
+<h3 id="BeanFactory"><a href="#BeanFactory" class="headerlink" title="BeanFactory"></a>BeanFactory</h3><h4 id="DefaultListableBeanFactory-默认实现"><a href="#DefaultListableBeanFactory-默认实现" class="headerlink" title="DefaultListableBeanFactory 默认实现"></a>DefaultListableBeanFactory 默认实现</h4><ul>
+<li><h5 id="XmlBeanFactory"><a href="#XmlBeanFactory" class="headerlink" title="XmlBeanFactory"></a>XmlBeanFactory</h5></li>
+</ul>
+<p>加载启动类，调用AnnotatedBeanDefinitionReader#doRegisterBean方法，</p>
+<h3 id="常用JSR注解"><a href="#常用JSR注解" class="headerlink" title="常用JSR注解"></a>常用JSR注解</h3><ul>
+<li>PostConstruct</li>
+<li>PreDestroy</li>
+</ul>
+<h3 id="常用spring加载方式"><a href="#常用spring加载方式" class="headerlink" title="常用spring加载方式"></a>常用spring加载方式</h3><ul>
+<li>ClassPathXmlApplicationContext 通过xml方式</li>
+<li>AnnationConfigApplicationConext 通过注解</li>
+<li>AnnotationConfigWebApplicationContext</li>
+</ul>
+<h4 id="Spirng-mvc-加载两种方式"><a href="#Spirng-mvc-加载两种方式" class="headerlink" title="Spirng mvc 加载两种方式"></a>Spirng mvc 加载两种方式</h4><h5 id="基于DispatcherServlet-配置xml方式实现"><a href="#基于DispatcherServlet-配置xml方式实现" class="headerlink" title="基于DispatcherServlet 配置xml方式实现"></a>基于DispatcherServlet 配置xml方式实现</h5><h6 id="Servlet-流程"><a href="#Servlet-流程" class="headerlink" title="Servlet 流程"></a>Servlet 流程</h6><ol>
+<li>init</li>
+<li>doGet/doPost</li>
+<li>distory</li>
+</ol>
+<p>继承关系：DispatcherServlet –&gt; FrameworkServlet –&gt; HttpServletBean –&gt; HttpServlet</p>
+<p>创建servlet之后，会调用会调用org.springframework.web.servlet.HttpServletBean#init,一个请求发到服务端之后，会调用doGet/doPost 方法，会调用org.springframework.web.servlet.FrameworkServlet#doPost/</p>
+<p>org.springframework.web.servlet.FrameworkServlet#doGet 方法，FrameworkServlet定义了抽象的doService方法，会调用子类的<strong>DispatcherServlet#doService</strong></p>
+<p>核实初始化handlersMapping , ContextRefreshedEvent,监听这个事件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**比较隐秘，一个内部类实现了一个监听**/</span></span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ContextRefreshListener</span> <span class="keyword">implements</span> <span class="title">ApplicationListener</span>&lt;<span class="title">ContextRefreshedEvent</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ContextRefreshedEvent event)</span> </span>&#123;</span><br><span class="line">        FrameworkServlet.<span class="keyword">this</span>.onApplicationEvent(event);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onApplicationEvent</span><span class="params">(ContextRefreshedEvent event)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.refreshEventReceived = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>.onRefreshMonitor) &#123;</span><br><span class="line">        onRefresh(event.getApplicationContext());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>核心方法：<strong>doDispatch</strong></p>
+<ol>
+<li>处理mappedHandler,得到一个</li>
+</ol>
+<h5 id="基于ServletContainerInitializer-实现，"><a href="#基于ServletContainerInitializer-实现，" class="headerlink" title="基于ServletContainerInitializer 实现，"></a>基于ServletContainerInitializer 实现，</h5><p>servlet 3.0 定义接口<strong>ServletContainerInitializer</strong>，容器启动之后，</p>
+<ul>
+<li><p>通过SPI ，找到SpringServletContainerInitializer，</p>
+</li>
+<li><p>每个实现上面明确定义HandlesType(WebApplicationInitializer.class)</p>
+</li>
+<li><p>扫描HandlesTypes 所有实现</p>
+</li>
+<li><p>调用onStart方法</p>
+</li>
+<li><p>onstart方法最终还是要创建dispatchservlet方式</p>
+</li>
+</ul>
+<p><img src="C:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1571394588745.png" alt="1571394588745"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStartup</span><span class="params">(@Nullable Set&lt;Class&lt;?&gt;&gt; webAppInitializerClasses, ServletContext servletContext)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line"></span><br><span class="line">		List&lt;WebApplicationInitializer&gt; initializers = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (webAppInitializerClasses != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">for</span> (Class&lt;?&gt; waiClass : webAppInitializerClasses) &#123;</span><br><span class="line">				<span class="comment">// Be defensive: Some servlet containers provide us with invalid classes,</span></span><br><span class="line">				<span class="comment">// no matter what @HandlesTypes says...</span></span><br><span class="line">				<span class="keyword">if</span> (!waiClass.isInterface() &amp;&amp; !Modifier.isAbstract(waiClass.getModifiers()) &amp;&amp;</span><br><span class="line">						WebApplicationInitializer<span class="class">.<span class="keyword">class</span>.<span class="title">isAssignableFrom</span>(<span class="title">waiClass</span>)) </span>&#123;</span><br><span class="line">					<span class="keyword">try</span> &#123;</span><br><span class="line">						initializers.add((WebApplicationInitializer)</span><br><span class="line">								ReflectionUtils.accessibleConstructor(waiClass).newInstance());</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">						<span class="keyword">throw</span> <span class="keyword">new</span> ServletException(<span class="string">"Failed to instantiate WebApplicationInitializer class"</span>, ex);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (initializers.isEmpty()) &#123;</span><br><span class="line">			servletContext.log(<span class="string">"No Spring WebApplicationInitializer types detected on classpath"</span>);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		servletContext.log(initializers.size() + <span class="string">" Spring WebApplicationInitializers detected on classpath"</span>);</span><br><span class="line">		AnnotationAwareOrderComparator.sort(initializers);</span><br><span class="line">		<span class="keyword">for</span> (WebApplicationInitializer initializer : initializers) &#123;</span><br><span class="line">			initializer.onStartup(servletContext);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如，我们定义MyWebApplicationInitializer </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyWebApplicationInitializer</span> <span class="keyword">implements</span> <span class="title">WebApplicationInitializer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStartup</span><span class="params">(ServletContext servletCxt)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Load Spring web application configuration 注解上下文容器</span></span><br><span class="line">        AnnotationConfigWebApplicationContext ac = <span class="keyword">new</span> AnnotationConfigWebApplicationContext();</span><br><span class="line">        ac.register(AppConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        ac.refresh();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Create and register the DispatcherServlet</span></span><br><span class="line">        DispatcherServlet servlet = <span class="keyword">new</span> DispatcherServlet(ac);</span><br><span class="line">        ServletRegistration.Dynamic registration = servletCxt.addServlet(<span class="string">"app"</span>, servlet);</span><br><span class="line">        registration.setLoadOnStartup(<span class="number">1</span>);</span><br><span class="line">        registration.addMapping(<span class="string">"/app/*"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="基于Annocation初始化"><a href="#基于Annocation初始化" class="headerlink" title="基于Annocation初始化"></a>基于Annocation初始化</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.qy.spirng.scops;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.AnnotationConfigApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Conditional;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuliferDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 实例化一个String的ap，对象</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@Apple</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">ap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"apple"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 把ap()String对象注入QuliferDemo。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Apple</span></span><br><span class="line">    String ap;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据自定义条件注入</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ValidationConditional</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">eay</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"eay"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> String eay;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@Conditional</span>(value = ConditionalValidation<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">    <span class="title">public</span> <span class="title">String</span> <span class="title">hello</span>()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    String hello;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(ap);</span><br><span class="line">        System.out.println(eay);</span><br><span class="line">        System.out.println(hello);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        AnnotationConfigApplicationContext annotationConfigApplicationContext = <span class="keyword">new</span> AnnotationConfigApplicationContext(QuliferDemo<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        QuliferDemo quliferDemo = annotationConfigApplicationContext.getBean(QuliferDemo<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        quliferDemo.say();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><img src="C:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191115111859391.png" alt="image-20191115111859391"></p>
+</li>
+</ul>
+<ul>
+<li><p>初始化Annocation时，构建 AnnocationBeanDefinitionReader、ClassPathBeanDefinitionScanner.</p>
+<ul>
+<li><p>AnnocationBeanDefinitionReader</p>
+<p>解析加载的Bean，主要是解析Bean标签，如：lazy、primary等</p>
+</li>
+<li><p>ClassPathBeanDefinitionScanner</p>
+<p>扫描类路径</p>
+</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<p>小知识</p>
+</blockquote>
+<p> <strong>MetadateReader</strong> : 主要存放类对象相关注解信息</p>
+<p><strong>ClassPathBeanDefinitionScanner</strong> : 扫描注解相关注解</p>
+<ul>
+<li><strong>spring相关注解</strong> : component注解,如：repository、controller、service</li>
+<li><strong>JSR-250</strong>: ManagedBean</li>
+<li><strong>JSR-300</strong>: Named</li>
+</ul>
+<ol>
+<li>解析bean得到beandefinition对象，放到DefaultListableBeanFactory#beanDefinitionMap中<ol>
+<li>beandeifinition有三种：AnnotationBeanDefinition、ScannerBeanDefinition、ConfigurationPropertiesValueObjectBeanDefinition</li>
+</ol>
+</li>
+</ol>
+<p><img src="C:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191115135053740.png" alt="image-20191115135053740"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qq627955224.github.io/2019/09/10/spring/Spring-%E5%BF%83%E5%BE%97/" data-id="ck8r5atv200081gtz061n2uz2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/09/docker/notepad/k8s%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">docker/notepad/k8s常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/lock/Lock/">Lock</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/volatile/">concurrent/volatile</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/Thread/">concurrent/Thread</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/synchronized/">concurrent/synchronized</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 yanzhao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

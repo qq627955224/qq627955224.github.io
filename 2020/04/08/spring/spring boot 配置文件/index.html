@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>spring/spring boot 配置文件 | yanzhao</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="# Spring  Boot 配置加载背景​    近期启动一个启动，项目结构是多个模块，其中一个是通用模块：Cache，cache模块自身配置一个application.yml,其他模块依赖此模块，并且有自己的application.yml文件 需求当其他模块依赖cache模块时，突然发现cache模块的配置文件无法加载，why? 试错根据Spring boot 启动相关事件，定位ConfigF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring&#x2F;spring boot 配置文件">
+<meta property="og:url" content="http://qq627955224.github.io/2020/04/08/spring/spring%20boot%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="yanzhao">
+<meta property="og:description" content="# Spring  Boot 配置加载背景​    近期启动一个启动，项目结构是多个模块，其中一个是通用模块：Cache，cache模块自身配置一个application.yml,其他模块依赖此模块，并且有自己的application.yml文件 需求当其他模块依赖cache模块时，突然发现cache模块的配置文件无法加载，why? 试错根据Spring boot 启动相关事件，定位ConfigF">
+<meta property="article:published_time" content="2020-04-08T09:06:25.854Z">
+<meta property="article:modified_time" content="2020-04-09T01:43:30.667Z">
+<meta property="article:author" content="yanzhao">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="yanzhao" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yanzhao</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">You need to leave your footprints on the way forward. Do not look back in blank</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://qq627955224.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-spring/spring boot 配置文件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/08/spring/spring%20boot%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" class="article-date">
+  <time datetime="2020-04-08T09:06:25.854Z" itemprop="datePublished">2020-04-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      spring/spring boot 配置文件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring-Boot-配置加载"><a href="#Spring-Boot-配置加载" class="headerlink" title="# Spring  Boot 配置加载"></a># Spring  Boot 配置加载</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>​    近期启动一个启动，项目结构是多个模块，其中一个是通用模块：Cache，cache模块自身配置一个application.yml,其他模块依赖此模块，并且有自己的application.yml文件</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>当其他模块依赖cache模块时，突然发现cache模块的配置文件无法加载，why?</p>
+<h2 id="试错"><a href="#试错" class="headerlink" title="试错"></a>试错</h2><h3 id="根据Spring-boot-启动相关事件，定位ConfigFileApplicationListener"><a href="#根据Spring-boot-启动相关事件，定位ConfigFileApplicationListener" class="headerlink" title="根据Spring boot 启动相关事件，定位ConfigFileApplicationListener"></a>根据Spring boot 启动相关事件，定位ConfigFileApplicationListener</h3><p>官方文档，提供了相关配置项，我们通过官方文档，能发现，有个叫<strong>spring.config.name</strong>的配置，文档并没有说明多个文件名称如何配置，根据常规多数是通过“,”根据分割，不妨尝试</p>
+<blockquote>
+<p><a href="https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/reference/html/appendix-application-properties.html#common-application-properties" target="_blank" rel="noopener">https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/reference/html/appendix-application-properties.html#common-application-properties</a></p>
+</blockquote>
+<h4 id="猜测一：文件名-以-进行分割"><a href="#猜测一：文件名-以-进行分割" class="headerlink" title="猜测一：文件名 以 ,进行分割"></a>猜测一：文件名 以 <strong>,</strong>进行分割</h4><p>经过尝试发现失败，spring boot 默认读取的配置文件就是：application，假如你想更换非命名为application的配置文件配置了spring.config.name，无法加载，因为这个文件此时没有被加载</p>
+<h4 id="猜测二：既然非application的无法加载，能否通过环境变量配置"><a href="#猜测二：既然非application的无法加载，能否通过环境变量配置" class="headerlink" title="猜测二：既然非application的无法加载，能否通过环境变量配置"></a>猜测二：既然非application的无法加载，能否通过环境变量配置</h4><p>通过启动命令 ** java -jar -Dspring.config.name=111.yml,application.yml **</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qq627955224.github.io/2020/04/08/spring/spring%20boot%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" data-id="ck8r5atud00001gtza5gr0qlu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/08/dubbo/Dubbo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          dubbo/Dubbo
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/08/docker/notepad/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">docker/notepad/常用命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/09/docker/notepad/k8s%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">docker/notepad/k8s常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/lock/Lock/">Lock</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/volatile/">concurrent/volatile</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/Thread/">concurrent/Thread</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/synchronized/">concurrent/synchronized</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 yanzhao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

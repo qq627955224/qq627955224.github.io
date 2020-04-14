@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>concurrent/volatile | yanzhao</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一段代码引起思考 1234567891011121314151617public class VolatileTest &amp;#123;    public static boolean stop &#x3D; false;    public static void main(String[] args) throws InterruptedException &amp;#123;        new Thread">
+<meta property="og:type" content="article">
+<meta property="og:title" content="concurrent&#x2F;volatile">
+<meta property="og:url" content="http://qq627955224.github.io/2020/04/08/concurrent/volatile/index.html">
+<meta property="og:site_name" content="yanzhao">
+<meta property="og:description" content="一段代码引起思考 1234567891011121314151617public class VolatileTest &amp;#123;    public static boolean stop &#x3D; false;    public static void main(String[] args) throws InterruptedException &amp;#123;        new Thread">
+<meta property="og:image" content="c:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565084731639.png">
+<meta property="og:image" content="c:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565085196303.png">
+<meta property="article:published_time" content="2020-04-08T09:09:18.425Z">
+<meta property="article:modified_time" content="2019-08-06T10:04:07.283Z">
+<meta property="article:author" content="yanzhao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565084731639.png">
+  
+    <link rel="alternate" href="/atom.xml" title="yanzhao" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yanzhao</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">You need to leave your footprints on the way forward. Do not look back in blank</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://qq627955224.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-concurrent/volatile" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/08/concurrent/volatile/" class="article-date">
+  <time datetime="2020-04-08T09:09:18.425Z" itemprop="datePublished">2020-04-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      concurrent/volatile
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>一段代码引起思考</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VolatileTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> stop = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">while</span> (!stop)&#123;</span><br><span class="line"><span class="comment">//                System.out.println(stop);</span></span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"退出"</span>);</span><br><span class="line">        &#125;).start();</span><br><span class="line">        System.out.println(<span class="string">"开始执行"</span>);</span><br><span class="line">        TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">        stop = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果：<strong>while循环不会退出</strong>,加入<strong>volatile</strong>关键字之后，<strong>程序主动退出</strong>，这说明什么？</p>
+<p>再多线程，共享变量，其中一个线程进行修改，其他线程不能及时获取到变更后的值，这就是所谓的<strong>可见性</strong>,加入关键字之后，会立刻获取结果，说明，<strong>volatile</strong> 能够保证多线程共享变量的可见性</p>
+<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>保证了可见性，并不能保证原子性，接下来，我们分析如何保证的</p>
+<h4 id="硬件层面"><a href="#硬件层面" class="headerlink" title="硬件层面"></a>硬件层面</h4><p>CPU、内存、磁盘，一般情况，磁盘是拖后腿的</p>
+<ul>
+<li>CPU高速缓存</li>
+<li>增加进程、线程，通过CPU时间片切换提升CPU的使用率</li>
+<li>编译器的指令优化，更合理的去利用好CPU的高速缓存 然后每一种优化，都会带来相应的问题，而这些问题也是 导致线程安全性问题的根源。为了了解前面提到的可见性 问题的本质，我们有必要去了解这些优化的过程  </li>
+</ul>
+<p><strong>CPU高速缓存</strong></p>
+<p>高速缓存分为三部分：L1,L2,L3,其中L1,L2是存储是CPU层面，L3是物理内存与CPU直接的</p>
+<p><img src="C:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565084731639.png" alt="1565084731639"></p>
+<p>此时，CPU高速缓存确实处理了与主内存速度的问题，但是同时也带来了，<strong>缓存一致性</strong>问题。</p>
+<p><img src="C:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565085196303.png" alt="1565085196303"></p>
+<p>i++，最终结果是&lt;=2;</p>
+<p><strong>缓存一致性问题</strong></p>
+<p> 各自CPU都从自己缓存读取，当主内存刷新时候，自己的CPU内存并没有刷新，产生缓存一致性问题</p>
+<p><strong>解决办法：</strong></p>
+<ul>
+<li><p>总线锁</p>
+<p>多核CPU,一个CPU对共享内存进行操作的时候，在总线会LOCK#信息，其他CPU无法通过总线来访问共享内存的数据，这种并不能达到并行计算效果</p>
+</li>
+<li><p>缓存锁</p>
+</li>
+</ul>
+<p>缓存协议MESI，modify、exclusive，share,invilate</p>
+<pre><code> M：被修改的。处于这一状态的数据，只在本CPU中有缓存数据，而其他CPU中没有。同时其状态相对于内存中的值来说，是已经被修改的，且没有更新到内存中。
+E：独占的。处于这一状态的数据，只有在本CPU中有缓存，且其数据没有修改，即与内存中一致。
+S：共享的。处于这一状态的数据在多个CPU中都有缓存，且与内存一致。</code></pre><p>​        I：无效的。本CPU中的这份缓存已经无效。</p>
+<p>*<em>在 MESI 协议中，每个缓存的缓存控制器不仅知道自己的 读写操作，而且也监听(snoop)其它Cache的读写操作 *</em></p>
+<h4 id="软件层面"><a href="#软件层面" class="headerlink" title="软件层面"></a>软件层面</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qq627955224.github.io/2020/04/08/concurrent/volatile/" data-id="ck8r5atuy00031gtz57b3a8h5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/08/lock/Lock/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Lock
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/08/concurrent/Thread/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">concurrent/Thread</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/09/docker/notepad/k8s%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">docker/notepad/k8s常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/lock/Lock/">Lock</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/volatile/">concurrent/volatile</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/Thread/">concurrent/Thread</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/synchronized/">concurrent/synchronized</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 yanzhao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

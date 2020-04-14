@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>concurrent/synchronized | yanzhao</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ƫ����ͨ��cas compareAndSwap()��֤��ȡ���Ƿ�ɹ����������ݿ��е��ֹ���������ͷ��  threadID epoch  age 1 �Ƿ�ƫ����  1 ����ʶλ �˳����ʺϣ�A�߳�Ƶ������������B�̺߳�С���ʲ��룬һ��������ã��˳���ʵ��Ӧ�ò�����*  ��������ThreadA ��">
+<meta property="og:type" content="article">
+<meta property="og:title" content="concurrent&#x2F;synchronized">
+<meta property="og:url" content="http://qq627955224.github.io/2020/04/08/concurrent/synchronized/index.html">
+<meta property="og:site_name" content="yanzhao">
+<meta property="og:description" content="ƫ����ͨ��cas compareAndSwap()��֤��ȡ���Ƿ�ɹ����������ݿ��е��ֹ���������ͷ��  threadID epoch  age 1 �Ƿ�ƫ����  1 ����ʶλ �˳����ʺϣ�A�߳�Ƶ������������B�̺߳�С���ʲ��룬һ��������ã��˳���ʵ��Ӧ�ò�����*  ��������ThreadA ��">
+<meta property="og:image" content="c:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564537160505.png">
+<meta property="article:published_time" content="2020-04-08T09:09:15.201Z">
+<meta property="article:modified_time" content="2019-07-31T01:39:31.632Z">
+<meta property="article:author" content="yanzhao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564537160505.png">
+  
+    <link rel="alternate" href="/atom.xml" title="yanzhao" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yanzhao</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">You need to leave your footprints on the way forward. Do not look back in blank</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://qq627955224.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-concurrent/synchronized" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/08/concurrent/synchronized/" class="article-date">
+  <time datetime="2020-04-08T09:09:15.201Z" itemprop="datePublished">2020-04-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      concurrent/synchronized
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="C:%5CUsers%5Cbyz%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1564537160505.png" alt="1564537160505"></p>
+<h4 id="ƫ����"><a href="#ƫ����" class="headerlink" title="ƫ����"></a>ƫ����</h4><p>ͨ��cas compareAndSwap()��֤��ȡ���Ƿ�ɹ����������ݿ��е��ֹ���������ͷ��</p>
+<ul>
+<li>threadID</li>
+<li>epoch </li>
+<li>age</li>
+<li>1 �Ƿ�ƫ���� </li>
+<li>1 ����ʶλ</li>
+<li><em>�˳����ʺϣ�A�߳�Ƶ������������B�̺߳�С���ʲ��룬һ��������ã��˳���ʵ��Ӧ�ò�����*</em></li>
+</ul>
+<h4 id="��������"><a href="#��������" class="headerlink" title="��������"></a>��������</h4><p>ThreadA ���ж���������ʱThreadB ͨ������������������Ӧ����ʵ�ֻ�ȡ��������ͷ����threadջ������¼��ַ��ջ��¼��threadID��epoch��age����Ϣ��<br>α��������</p>
+<p><code>for(;;){</code><br><code>compareAndSwap();</code><br><code>}</code><br><strong>�˳����ʺ�A��B�߳̽���ִ�У��������ʱ��</strong></p>
+<h4 id="��������-1"><a href="#��������-1" class="headerlink" title="��������"></a>��������</h4><p>����<strong>synchronized</strong>��������ͷ��ָ�򻥳�����ָ�룬�����ֽ��룬����<strong>monitorenter</strong>��<strong>monitorexit</strong>ִ�У�<br><code>monitorenter</code><br><code>say()</code><br><code>monitorexit</code><br>monitorenterִ��ʱ�������ϵͳ��<strong>muteText()</strong>�ų�����������ȡ�����߳�ִ��say������δ��ȡ��thread������<strong>ͬ������</strong>��ֱ�����ж��������߳��ͷ�����ͬ�������߳����·�����һ������������ν�ļ���ģʽ��</p>
+<h5 id="wait"><a href="#wait" class="headerlink" title="wait"></a>wait</h5><p>wait������synchronizedͬʱʹ�ã�����wait֮�����ͷţ�CPU��Դ�����ͷţ��ȴ�notify��notifyall���ѻ���interrupted������ʱ��״̬���á���ʱ�̼߳���<strong>�ȴ�����</strong></p>
+<h4 id="sleep"><a href="#sleep" class="headerlink" title="sleep"></a>sleep</h4><p>sleep��CPU��Դ�ͷţ������ͷ�</p>
+<h4 id="notify"><a href="#notify" class="headerlink" title="notify"></a>notify</h4><p>notify���̻߳���</p>
+<h5 id="notifyall"><a href="#notifyall" class="headerlink" title="notifyall"></a>notifyall</h5><p>����<strong>�ȴ�����</strong>��ȫ���̣߳��̼߳���<strong>ͬ������</strong>�У�ִ��<strong>��������</strong>��ȡ����</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://qq627955224.github.io/2020/04/08/concurrent/synchronized/" data-id="ck8r5atux00021gtz4pfgbsyg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/08/concurrent/Thread/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          concurrent/Thread
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/08/kafka/Kafka/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">kafka/Kafka</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/09/docker/notepad/k8s%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">docker/notepad/k8s常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/lock/Lock/">Lock</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/volatile/">concurrent/volatile</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/Thread/">concurrent/Thread</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/08/concurrent/synchronized/">concurrent/synchronized</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 yanzhao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
